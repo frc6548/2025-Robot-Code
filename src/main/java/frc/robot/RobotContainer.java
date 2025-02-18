@@ -17,7 +17,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import frc.robot.commands.ElevatorPIDCommand;
 // import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakePivotPIDCommand;
@@ -81,15 +80,15 @@ public class RobotContainer {
             )
         );
 
-        // controller.y().toggleOnTrue(intakeCommand); TODO Photoelectric Sensor
-        controller.y().whileTrue(new InstantCommand(() -> intakeSubsystem.setIntakeMotor(.5)));
+        controller.y().toggleOnTrue(intakeCommand); //TODO Photoelectric Sensor
         controller.rightBumper().whileTrue(new InstantCommand(() -> intakeSubsystem.setIntakeMotor(-.5)));
-        controller.povUp().onTrue(new ElevatorPIDCommand(elevatorSubsystem, 3));
-        controller.povDown().onTrue(new ElevatorPIDCommand(elevatorSubsystem, 2));
+        controller.rightBumper().whileFalse(new InstantCommand(() -> intakeSubsystem.setIntakeMotor(-.5)));
+        // controller.povUp().onTrue(new ElevatorPIDCommand(elevatorSubsystem, 3));
+        // controller.povDown().onTrue(new ElevatorPIDCommand(elevatorSubsystem, 2));
         controller.x().onTrue(new IntakePivotPIDCommand(intakeSubsystem, 2));
         controller.b().onTrue(new IntakePivotPIDCommand(intakeSubsystem, 10));
-        controller.leftTrigger().whileTrue(new InstantCommand(() -> ClimberSubsystem.setClimberMotor(-.15)));
-        controller.rightTrigger().whileTrue(new InstantCommand(() -> ClimberSubsystem.setClimberMotor(.15)));
+        // controller.leftTrigger().whileTrue(new InstantCommand(() -> ClimberSubsystem.setClimberMotor(-.15)));
+        // controller.rightTrigger().whileTrue(new InstantCommand(() -> ClimberSubsystem.setClimberMotor(.15)));
         // controller.a().whileTrue(new CameraSubsystem.DynamicCommand(() -> {
         //     return CameraSubsystem.getPathCommandFromCoralStationTag(CoralStationID.Left);
         // })); TODO: Autonomous Score

@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Elevator extends SubsystemBase{
-    private final SparkMax ElevatorMotor1 = new SparkMax(16, MotorType.kBrushless);
-    private final SparkMax ElevatorMotor2 = new SparkMax(17, MotorType.kBrushless);
-    public final RelativeEncoder ElevatorEncoder1 = ElevatorMotor1.getEncoder();
-    public final RelativeEncoder ElevatorEncoder2 = ElevatorMotor2.getEncoder();
+    private final SparkMax FrontElevatorMotor = new SparkMax(14, MotorType.kBrushless); //14
+    private final SparkMax BackElevatorMotor = new SparkMax(15, MotorType.kBrushless); //15
+    public final RelativeEncoder ElevatorEncoder1 = FrontElevatorMotor.getEncoder();
+    public final RelativeEncoder ElevatorEncoder2 = BackElevatorMotor.getEncoder();
 
     @Override
     public void periodic() {
@@ -18,11 +18,10 @@ public class Elevator extends SubsystemBase{
         SmartDashboard.putNumber("Elevator Velocity2", ElevatorEncoder2.getVelocity());
         SmartDashboard.putNumber("Elevator Encoder1", ElevatorEncoder1.getPosition());
         SmartDashboard.putNumber("Elevator Encoder2", ElevatorEncoder2.getPosition());
-
 }
     public void setElevatorMotor(double speed) {
-        ElevatorMotor1.set(speed);
-        ElevatorMotor2.set(speed);
+        FrontElevatorMotor.set(speed);
+        BackElevatorMotor.set(speed);
 }
     public double getElevatorEncoder1() {
         return ElevatorEncoder1.getPosition();

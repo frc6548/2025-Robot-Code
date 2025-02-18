@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Climber extends SubsystemBase{
-    private final SparkMax ClimberMotor1 = new SparkMax(18, MotorType.kBrushless);
-    private final SparkMax ClimberMotor2 = new SparkMax(19, MotorType.kBrushless); 
-    public final RelativeEncoder ClimberEncoder1 = ClimberMotor1.getEncoder();
-    public final RelativeEncoder ClimberEncoder2 = ClimberMotor2.getEncoder();
+    private final SparkMax leftClimberMotor = new SparkMax(46, MotorType.kBrushless); //16
+    private final SparkMax RightClimberMotor = new SparkMax(47, MotorType.kBrushless);  //17
+    public final RelativeEncoder ClimberEncoder1 = leftClimberMotor.getEncoder();
+    public final RelativeEncoder ClimberEncoder2 = RightClimberMotor.getEncoder();
 
     @Override
     public void periodic() {
@@ -19,13 +19,16 @@ public class Climber extends SubsystemBase{
         SmartDashboard.putNumber("Left Climber Encoder", ClimberEncoder1.getPosition());
         SmartDashboard.putNumber("Right Climber Encoder", ClimberEncoder2.getPosition());
     }
+
     public void setClimberMotor(double speed) {
-        ClimberMotor1.set(speed);
-        ClimberMotor2.set(-speed);
+        leftClimberMotor.set(speed);
+        RightClimberMotor.set(-speed);
     }
+
     public double getClimberEncoder1() {
         return ClimberEncoder1.getPosition();
     }
+    
     public void resetClimberEncoder1() {
         ClimberEncoder1.setPosition(0);
     }

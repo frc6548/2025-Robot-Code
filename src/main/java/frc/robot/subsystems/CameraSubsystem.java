@@ -46,7 +46,7 @@ public class CameraSubsystem extends SubsystemBase {
 
     private static final String limelightOneName = "limelight-fourone";
     private static final String limelightTwoName = "limelight-threeg";
-    private static final boolean useLimelightTwo = true;
+    private static final boolean useLimelightTwo = false;
 
     private static final HashMap<Integer, AprilTag> aprilTagMap = new HashMap<>();
     private static final HashMap<Integer, PathPlannerPath> aprilTagLineUpMap = new HashMap<>();
@@ -71,7 +71,7 @@ public class CameraSubsystem extends SubsystemBase {
 
         boolean success = false;
         try {
-            AprilTagFieldLayout fieldLayout = AprilTagFieldLayout.loadField(AprilTagFields.k2025Reefscape);
+            AprilTagFieldLayout fieldLayout = AprilTagFieldLayout.loadField(AprilTagFields.k2025ReefscapeWelded);
             for (var tag : fieldLayout.getTags()) {
                 aprilTagMap.put(tag.ID, tag);
             }
